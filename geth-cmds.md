@@ -77,9 +77,7 @@ geth --datadir . dumpconfig > config.toml
 Optionally you may add enodes as peers in the `config.toml` add the enode values separated by commas.
 
 ```
-...
 StaticNodes = ["enode1", "enode2"]
-...
 ```
 
 Save the file and run the geth command below:
