@@ -53,26 +53,50 @@ Repeat for `node3`.
 Change into `node1` directory, and do
 
 ```
-geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1
+geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover
 ```
 
-Change into `node2` directory, and do
+Change into `node2` directory. Run the command line above but change the public key and IP address accordingly. Repeat for `node3` directory.
+
+## Start node in the background
+
+To start geth and leave it in the background, run:
 
 ```
-geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30311 --http --http.addr "localhost" --http.port 8546 --authrpc.port 8552 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1
+nohup geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover >> log.txt 2>&1 & disown
 ```
 
-Change into `node3` directory, and do
+## To create a config.toml
+
+Run:
 
 ```
-geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30312 --http --http.addr "localhost" --http.port 8547 --authrpc.port 8553 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1
+geth --datadir . dumpconfig > config.toml
+```
+
+Optionally you may add enodes as peers in the `config.toml` add the enode values separated by commas.
+
+```
+...
+StaticNodes = ["enode1", "enode2"]
+...
+```
+
+## OPTIONAL: Execute JSON-RPC API in shell
+
+You can get, for example the enode value without opening a new terminal by using the command below:
+
+```
+geth --datadir node1 --exec 'admin.nodeInfo.enode' attach node1/geth.ipc
 
 ```
 
 ## OPTIONAL: Start node with influxdb
 
-```
-geth --datadir geth-net/node1 --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0xAe18E0CA7b92E2190C431566719417762205b623" --password geth-net/node1/password --nat=extip:127.0.0.1 --metrics --metrics.influxdbv2 --metrics.influxdb.organization thuleen --metrics.influxdb.token o0Zzfgkbww5gb5VlBGJedYDQr8gpY37TECYxtR-WujESXAZEpevk3x4jp_bGnDE-1YqUYAhQ-r3QJ4_lZkNwJQ== --metrics.influxdb.bucket geth
+````
+
+geth --datadir geth-net/node1 --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --http.corsdomain "_" --http.vhosts "_" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0xAe18E0CA7b92E2190C431566719417762205b623" --password geth-net/node1/password --nat=extip:127.0.0.1 --metrics --metrics.influxdbv2 --metrics.influxdb.organization thuleen --metrics.influxdb.token o0Zzfgkbww5gb5VlBGJedYDQr8gpY37TECYxtR-WujESXAZEpevk3x4jp_bGnDE-1YqUYAhQ-r3QJ4_lZkNwJQ== --metrics.influxdb.bucket geth
+
 ```
 
 List of options that were added above were:
@@ -110,19 +134,30 @@ Repeat for each node.
 For example for `node1`, in its JS console do,
 
 ```
+
 admin.addPeer("<enode_node2>")
+
 ```
 
 ```
+
 admin.addPeer("<enode_node3>")
+
 ```
 
 ## Transfer fund to an account via geth ipc console
 
 ```
+
 geth --datadir . attach geth.ipc
+
 ```
 
 ```
+
 eth.sendTransaction({from: "0x_node_1_account",to: "0x_poor_thing_account", value: "100000000000000000"})
+
 ```
+
+```
+````

@@ -135,3 +135,12 @@ plugins: [
 Then VSCode press `CMD + SHIP + P`, then type `Reload Window`.
 
 You can fix by press `CMD + SHIP + P`, then type `ESlint: Fix all auto-fixable Problems`.
+
+## Install dependencies
+
+- react-redux
+- react-router-dom
+- react-select
+- react-hook-form
+- @mui/material
+- @mui/icons-material

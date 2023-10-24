@@ -68,7 +68,7 @@ There are 59 panels in Grafana and there are categorised into 5 following sectio
 | No  | Measurement                      | Field |
 | --- | -------------------------------- | ----- |
 | 01  | `geth.system/cpu/sysload.gauge`  | value |
-| 02  | `geth.system/cpu/sysload.gauge`  | value |
+| 02  | `geth.system/cpu/syswait.gauge`  | value |
 | 03  | `geth.system/cpu/procload.gauge` | value |
 
 ### Memory
