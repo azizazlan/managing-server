@@ -53,7 +53,7 @@ Repeat for `node3`.
 Change into `node1` directory, and do
 
 ```
-geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover
+geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.etherbase "0x..." --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover
 ```
 
 Change into `node2` directory. Run the command line above but change the public key and IP address accordingly. Repeat for `node3` directory.
@@ -63,7 +63,7 @@ Change into `node2` directory. Run the command line above but change the public 
 To start geth and leave it in the background, run:
 
 ```
-nohup geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover >> log.txt 2>&1 & disown
+nohup geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.etherbase "0x..." --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover >> log.txt 2>&1 & disown
 ```
 
 ## To create a config.toml
@@ -83,7 +83,7 @@ StaticNodes = ["enode1", "enode2"]
 Save the file and run the geth command below:
 
 ```
-nohup geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover --config config.toml >> log.txt 2>&1 & disown
+nohup geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.etherbase "0x..." --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover --config config.toml >> log.txt 2>&1 & disown
 ```
 
 WARNING: Make sure you killed the previous geth process before running the command above!
