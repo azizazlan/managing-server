@@ -82,6 +82,14 @@ StaticNodes = ["enode1", "enode2"]
 ...
 ```
 
+Save the file and run the geth command below:
+
+```
+nohup geth --datadir . --networkid 2022 --syncmode "full" --verbosity 3 --port 30310 --http --http.addr "localhost" --http.port 8545 --authrpc.port 8556 --http.corsdomain "*" --http.vhosts "*" --http.api "admin,eth,web3,personal,miner,net,txpool,clique" --mine --miner.gasprice "0" --allow-insecure-unlock --unlock "0x..." --password password --nat=extip:127.0.0.1 --nodiscover --config config.toml >> log.txt 2>&1 & disown
+```
+
+WARNING: Make sure you killed the previous geth process before running the command above!
+
 ## OPTIONAL: Execute JSON-RPC API in shell
 
 You can get, for example the enode value without opening a new terminal by using the command below:
