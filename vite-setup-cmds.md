@@ -54,7 +54,7 @@ npx install-peerdeps --dev eslint-config-airbnb
 npm install eslint-config-airbnb-typescript --save-dev
 ```
 
-In the `eslintrc.cjs`, edit as the followings:
+In the `.eslintrc.cjs`, edit as the followings:
 
 ```diff
     "extends": [
@@ -102,7 +102,7 @@ module.exports = {
   };
 ```
 
-Edit `eslintrc.cjs`
+Edit `.eslintrc.cjs`
 
 ```diff
 ...
